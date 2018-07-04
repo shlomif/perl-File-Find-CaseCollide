@@ -21,6 +21,14 @@ sub verify
 
 Test::File::Find::CaseCollide - test for collisions in filenames, differing only in case
 
+=head1 SYNOPSIS
+
+    use Test::More tests => 1;
+    use Test::File::Find::CaseCollide ();
+
+    # TEST
+    Test::File::Find::CaseCollide->verify( { dir => '.' } );
+
 =head1 METHODS
 
 =head2 Test::File::Find::CaseCollide->verify({dir => "."});
