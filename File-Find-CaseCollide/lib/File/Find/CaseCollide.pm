@@ -26,7 +26,7 @@ sub find
             {
                 push @{ $found{ lc $fn } }, $fn;
             }
-            my @positives = grep { $found{$_} > 1 } ( keys %found );
+            my @positives = grep { @{ $found{$_} } > 1 } ( keys %found );
 
             if (@positives)
             {
