@@ -10,14 +10,10 @@ has '_results' => ( is => 'rw' );
 has '_ffo'     => ( is => 'rw' );
 has 'dir'      => ( is => 'ro' );
 
-sub find
+sub _iter
 {
     my ($self) = @_;
-
-    $self->_results( {} );
-    $self->_ffo( File::Find::Object->new( {}, $self->dir ) );
-
-    while ( my $r = $self->_ffo->next_obj() )
+    if ( my $r = $self->_ffo->next_obj() )
     {
         if ( $r->is_dir() )
         {
@@ -34,7 +30,22 @@ sub find
                     +{ map { $_ => $found{$_} } @positives };
             }
         }
+        return 1;
     }
+    return;
+}
+
+sub find
+{
+    my ($self) = @_;
+
+    $self->_results( {} );
+    $self->_ffo( File::Find::Object->new( {}, $self->dir ) );
+
+    while ( $self->_iter )
+    {
+    }
+
     return $self->_results;
 }
 
