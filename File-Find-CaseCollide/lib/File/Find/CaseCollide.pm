@@ -55,6 +55,19 @@ sub find
 
 File::Find::CaseCollide - find collisions in filenames, differing only in case
 
+=head1 SYNOPSIS
+
+    use File::Find::CaseCollide ();
+
+    my $obj = File::Find::CaseCollide->new( { dir => '.' } );
+    my $results = $obj->find;
+
+=head1 DESCRIPTION
+
+This tests for filenames in the same directory which differ only in lowercase
+vs uppercase letters which some filesystems do not support (e.g: "hello.txt" vs.
+"Hello.txt").
+
 =head1 METHODS
 
 =head2 dir
@@ -66,6 +79,9 @@ Pass it as a parameter with a path to the directory tree to traverse.
 Traverses the tree and returns the collisions as a hash reference - hopefully
 empty.
 
-=cut
+=head1 SEE ALSO
+
+L<https://www.jamendo.com/album/59248/sense> - Sense by LadyLau, a CC-licensed
+album.
 
 =cut
