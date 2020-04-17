@@ -11,4 +11,5 @@ use File::Find::CaseCollide ();
 my $obj = File::Find::CaseCollide->new( { dir => ( shift(@ARGV) // '.' ) } );
 my $results = $obj->find;
 binmode STDOUT, ':encoding(utf8)';
-print JSON::MaybeXS->new( utf8 => 1, pretty => 1 )->encode($results), "\n";
+print JSON::MaybeXS->new( canonical => 1, utf8 => 1, pretty => 1 )
+    ->encode($results), "\n";
