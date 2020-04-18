@@ -7,9 +7,25 @@ use autodie;
 
 use JSON::MaybeXS           ();
 use File::Find::CaseCollide ();
+use Getopt::Long qw/ GetOptions /;
+use List::Util 1.35 qw/ any /;
+
+my @skips;
+GetOptions( 'skip=s' => ( \@skips ), )
+    or die $!;
 
 my $obj = File::Find::CaseCollide->new( { dir => ( shift(@ARGV) // '.' ) } );
 my $results = $obj->find;
+if (@skips)
+{
+    for my $key ( keys(%$results) )
+    {
+        if ( any { $key =~ /$_/ } @skips )
+        {
+            delete $results->{$key};
+        }
+    }
+}
 binmode STDOUT, ':encoding(utf8)';
 print JSON::MaybeXS->new( canonical => 1, utf8 => 1, pretty => 1 )
     ->encode($results), "\n";
