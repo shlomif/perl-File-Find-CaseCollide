@@ -2,7 +2,7 @@ package Test::File::Find::CaseCollide;
 
 use strict;
 use warnings;
-use Test::Differences (qw( eq_or_diff ));
+use Test::Differences       (qw( eq_or_diff ));
 use File::Find::CaseCollide ();
 
 sub verify
